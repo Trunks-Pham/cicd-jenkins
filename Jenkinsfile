@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'admin/jenkins'
+        DOCKER_IMAGE = 'jenkins/jenkins'
         DOCKER_TAG = 'loving'
     }
 
