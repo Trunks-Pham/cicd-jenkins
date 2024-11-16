@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'trongpham99/golang-jenkins'
-        DOCKER_TAG = 'latest'
+        DOCKER_IMAGE = 'admin/jenkins'
+        DOCKER_TAG = 'loving'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/trongpham99-cpu/golang-jenkins.git'
+                git branch: 'main', url: 'https://github.com/Trunks-Pham/cicd-jenkins.git'
             }
         }
 
