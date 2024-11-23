@@ -55,4 +55,27 @@ pipeline {
             cleanWs()
         }
     }
+
+
+    post {
+        always {
+            cleanWs()
+        }
+
+        success {
+            sendTelegramMessage("✅ Build #${BUILD_NUMBER} was successful! ✅")
+        }
+
+        failure {
+            sendTelegramMessage("❌ Build #${BUILD_NUMBER} failed. ❌")
+        }
+    }
+}
+
+def sendTelegramMessage(String message) {
+    sh """
+    curl -s -X POST https://api.telegram.org/bot${7046314210:AAGqYso31LSx8_kzYpIOcjryCMPqfiztxnE}/sendMessage \
+    -d chat_id=${-1002415710063} \
+    -d text="${message}"
+    """
 }
