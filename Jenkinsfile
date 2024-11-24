@@ -40,12 +40,12 @@ pipeline {
         stage('Deploy Golang to DEV') {
             steps {
                 echo 'Deploying to DEV...'
-                sh 'docker image pull trongpham99/golang-jenkins:latest'
+                sh 'docker image pull phamminhthao/golang-jenkins:latest'
                 sh 'docker container stop golang-jenkins || echo "this container does not exist"'
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name server-golang -p 4000:3000 --network dev trongpham99/golang-jenkins:latest'
+                sh 'docker container run -d --rm --name server-golang -p 4000:3000 --network dev phamminhthao/golang-jenkins:latest'
             }
         }
     }
@@ -72,10 +72,12 @@ pipeline {
     }
 }
 
-def sendTelegramMessage(String message) {
-    sh """
-    curl -s -X POST https://api.telegram.org/bot${7046314210:AAGqYso31LSx8_kzYpIOcjryCMPqfiztxnE}/sendMessage \
-    -d chat_id=${-1002415710063} \
-    -d text="${message}"
-    """
+def sendTelegramMessage(String message = "") {
+    if (message.isEmpty()) {
+        error "Message cannot be empty"
+    }
+    def apiToken = "7046314210:AAGqYso31LSx8_kzYpIOcjryCMPqfiztxnE"
+    def chatId = "-1002415710063"
+    def curlCmd = "curl -s -X POST https://api.telegram.org/bot${apiToken}/sendMessage -d chat_id=${chatId} -d text=\"${message}\""
+    sh curlCmd
 }
