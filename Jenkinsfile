@@ -9,14 +9,14 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Trunks-Pham/cicd-jenkins.git'
+                git url: 'https://github.com/Trunks-Pham/cicd-jenkins.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}", "--tag ${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
             }
         }
@@ -45,11 +45,10 @@ pipeline {
                 sh 'docker network create dev || echo "this network exists"'
                 sh 'echo y | docker container prune '
 
-                sh 'docker container run -d --rm --name server-golang -p 4000:3000 --network dev phamminhthao/golang-jenkins:latest'
+                sh 'docker container run -d --name server-golang -p 4000:3000 --network dev phamminhthao/golang-jenkins:latest'
             }
         }
     }
-
 
     post {
         always {
