@@ -23,7 +23,10 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Running tests...'
+                script {
+                    // Ví dụ kiểm thử Go:
+                    sh 'go test ./...'
+                }
             }
         }
 
