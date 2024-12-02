@@ -1,69 +1,69 @@
-Sure, I can help with that! Here's a draft for your README file:
+# CICD Jenkins Pipeline for Golang Application
 
-```markdown
-# cicd-jenkins
+## Giới thiệu
 
-This repository contains a sample project demonstrating the use of Jenkins for Continuous Integration and Continuous Deployment (CI/CD) with a Go application.
+Dự án này cung cấp một pipeline Jenkins tự động hóa quá trình build, test và deploy một ứng dụng Golang sử dụng Docker. Pipeline này có các bước chính như clone mã nguồn, build Docker image, chạy test, push image lên Docker Hub, và deploy ứng dụng lên môi trường phát triển.
 
-## Table of Contents
+## Ứng dụng Golang
 
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+Ứng dụng là một API đơn giản sử dụng framework [Gin](https://github.com/gin-gonic/gin), cung cấp 2 endpoint chính:
 
-## Introduction
+- **`GET /products`**: Lấy danh sách sản phẩm.
+- **`POST /products`**: Thêm sản phẩm mới.
 
-This project showcases how to set up a CI/CD pipeline using Jenkins for a Go application. The pipeline includes steps for building, testing, and deploying the application.
+## Jenkins Pipeline
 
-## Prerequisites
+Pipeline Jenkins có các bước chính sau:
 
-Before you begin, ensure you have the following installed:
+1. **Clone Repository**: Lấy mã nguồn từ GitHub.
+2. **Build Docker Image**: Xây dựng Docker image cho ứng dụng Golang.
+3. **Run Tests**: Chạy các bài kiểm tra với `go test`.
+4. **Push to Docker Hub**: Đẩy Docker image lên Docker Hub.
+5. **Deploy to DEV**: Deploy ứng dụng lên môi trường phát triển sử dụng Docker.
 
-- Docker
-- Jenkins
-- Go (version 1.16 or later)
+### Các phần chính của `Jenkinsfile`:
 
-## Installation
+- **Git Clone**: Clone repository từ GitHub.
+- **Build Docker Image**: Sử dụng Docker để xây dựng image ứng dụng.
+- **Test**: Chạy kiểm tra Go.
+- **Push Image**: Đẩy Docker image lên Docker Hub.
+- **Deploy**: Deploy ứng dụng lên môi trường phát triển, sử dụng Docker để chạy container.
 
-1. Clone the repository:
+### Phần gửi thông báo Telegram:
 
-    ```bash
-    git clone https://github.com/Trunks-Pham/cicd-jenkins.git
-    cd cicd-jenkins
-    ```
+Gửi thông báo qua Telegram khi build thành công hoặc thất bại, giúp người phát triển theo dõi trạng thái build.
 
-2. Set up Jenkins:
+## Dockerfile
 
-    - Install Jenkins on your local machine or server.
-    - Install the necessary Jenkins plugins (e.g., Docker, Git, Go).
-    - Create a new Jenkins pipeline and configure it to use the `Jenkinsfile` in this repository.
+Dockerfile cung cấp các bước để xây dựng Docker image cho ứng dụng Golang:
 
-## Usage
+- **Cài đặt Go**: Sử dụng image Golang chính thức.
+- **Cài đặt dependencies**: Tải xuống và cài đặt các dependencies từ `go.mod`.
+- **Build**: Biên dịch ứng dụng Golang thành file thực thi.
+- **Expose Port**: Mở port 3000 để ứng dụng có thể giao tiếp qua HTTP.
 
-1. Build the Docker image:
+## Hướng Dẫn Chạy Ứng Dụng
 
-    ```bash
-    docker build -t cicd-jenkins .
-    ```
+### Chạy Ứng Dụng Cục Bộ
 
-2. Run the application:
+1. **Cài Đặt Go và Docker**: Cài đặt Go và Docker trên máy của bạn.
+2. **Clone Repository**:
+   ```bash
+   git clone https://github.com/Trunks-Pham/cicd-jenkins.git
+   cd cicd-jenkins
+   ```
+3. **Chạy Ứng Dụng**:
+   - **Không sử dụng Docker**:
+     ```bash
+     go run main.go
+     ```
+   - **Sử dụng Docker**:
+     ```bash
+     docker build -t golang-app .
+     docker run -p 3000:3000 golang-app
+     ```
 
-    ```bash
-    docker run -p 8080:8080 cicd-jenkins
-    ```
+### Kiểm Tra Các Endpoint
 
-3. Access the application at `http://localhost:8080`.
-
-## Contributing
-
-Contributions are welcome! Please fork this repository and submit a pull request with your changes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
-Feel free to customize this README file to better suit your project's needs!
+- **`GET /products`**: Lấy danh sách các sản phẩm.
+- **`POST /products`**: Thêm một sản phẩm mới.
