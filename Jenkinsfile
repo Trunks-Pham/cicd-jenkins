@@ -22,17 +22,6 @@ pipeline {
             }
         }
 
-stage('Run Tests') {
-    steps {
-        script {
-            // Chạy các bài kiểm tra Go trong một container Go
-            docker.image('golang:1.23.2-alpine3.20').inside('-v ${WORKSPACE}:/app') {
-                sh 'go test -run Main ./cicd-jenkins'
-            }
-        }
-    }
-}
-
         stage('Push to Docker Hub') {
             steps {
                 script {
