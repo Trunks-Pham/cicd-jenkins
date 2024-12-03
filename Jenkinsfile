@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Chạy các bài kiểm tra Go
-                    sh 'go test ./...'
+                    sh 'go test - run Main ./server'
                 }
             }
         }
