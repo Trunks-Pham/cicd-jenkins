@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                    sh 'sudo docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                 }
             }
         }
@@ -24,7 +24,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Ví dụ kiểm thử Go:
                     sh 'go test ./...'
                 }
             }
@@ -39,7 +38,6 @@ pipeline {
                 }
             }
         }
-        
 
         stage('Deploy Golang to DEV') {
             steps {
@@ -47,7 +45,7 @@ pipeline {
                 sh 'docker image pull phamminhthao/jenkins:loving'
                 sh 'docker container stop golang-jenkins || echo "this container does not exist"'
                 sh 'docker network create dev || echo "this network exists"'
-                sh 'echo y | docker container prune '
+                sh 'echo y | docker container prune'
 
                 sh 'docker container run -d --rm --name server-golang -p 4000:3000 --network dev phamminhthao/jenkins:loving'
             }
