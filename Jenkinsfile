@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'phamminhthao/jenkins'
-        DOCKER_TAG = 'loving'
+        DOCKER_TAG = 'main'
     }
 
     stages {
