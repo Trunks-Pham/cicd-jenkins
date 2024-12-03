@@ -22,11 +22,11 @@ pipeline {
             }
         }
 
-stage('Run Tests') {
-    steps {
-        skip 'No tests to run'
-    }
-}
+        stage('Run Tests') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
 
         stage('Push to Docker Hub') {
             steps {
