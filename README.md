@@ -8,10 +8,12 @@ This project provides a Jenkins pipeline to automate the process of building, te
 
 ## Golang Application  
 
-The application is a simple API built using the [Gin](https://github.com/gin-gonic/gin) framework, offering two main endpoints:  
+The application is a simple API built using the [Gin](https://github.com/gin-gonic/gin) framework, offering four main endpoints:  
 
 - **`GET /products`**: Retrieve the list of products.  
 - **`POST /products`**: Add a new product.  
+- **`PUT /products/{id}`**: Update an existing product by ID.  
+- **`DELETE /products/{id}`**: Delete a product by ID.  
 
 ## Jenkins Pipeline  
 
@@ -69,6 +71,8 @@ The Dockerfile outlines the steps to build a Docker image for the Golang applica
 
 - **`GET /products`**: Retrieve the list of products.  
 - **`POST /products`**: Add a new product.  
+- **`PUT /products/{id}`**: Update an existing product by ID.  
+- **`DELETE /products/{id}`**: Delete a product by ID.  
 
 ---
 
@@ -82,10 +86,12 @@ Dự án này cung cấp một pipeline Jenkins để tự động hóa quá tr�
 
 ## Ứng dụng Golang  
 
-Ứng dụng là một API đơn giản sử dụng framework [Gin](https://github.com/gin-gonic/gin), cung cấp 2 endpoint chính:  
+Ứng dụng là một API đơn giản sử dụng framework [Gin](https://github.com/gin-gonic/gin), cung cấp 4 endpoint chính:  
 
 - **`GET /products`**: Lấy danh sách sản phẩm.  
 - **`POST /products`**: Thêm sản phẩm mới.  
+- **`PUT /products/{id}`**: Cập nhật sản phẩm hiện tại theo ID.  
+- **`DELETE /products/{id}`**: Xóa sản phẩm theo ID.  
 
 ## Pipeline Jenkins  
 
@@ -143,3 +149,5 @@ Dockerfile cung cấp các bước để xây dựng Docker image cho ứng dụ
 
 - **`GET /products`**: Lấy danh sách sản phẩm.  
 - **`POST /products`**: Thêm sản phẩm mới.  
+- **`PUT /products/{id}`**: Cập nhật sản phẩm theo ID.  
+- **`DELETE /products/{id}`**: Xóa sản phẩm theo ID.  
