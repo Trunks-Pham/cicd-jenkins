@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'phamminhthao/jenkins'
         DOCKER_TAG = 'main'
+        load '.env'
     }
 
     stages {
@@ -83,8 +84,8 @@ def sendTelegramMessage(String message = "") {
     if (message.isEmpty()) {
         error "Message cannot be empty"
     }
-    def apiToken = "7046314210:AAGqYso31LSx8_kzYpIOcjryCMPqfiztxnE"
-    def chatId = "-1002415710063"
+    def apiToken = env.API_TOKEN
+    def chatId = env.CHAT_ID
     def curlCmd = "curl -s -X POST https://api.telegram.org/bot${apiToken}/sendMessage -d chat_id=${chatId} -d text=\"${message}\""
     sh curlCmd
 }
