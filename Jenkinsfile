@@ -59,7 +59,7 @@ pipeline {
             }
         }
     }
-
+ 
     post { 
         always {
             // Dọn dẹp workspace
