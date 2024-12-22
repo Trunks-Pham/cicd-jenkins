@@ -64,7 +64,7 @@ pipeline {
         always {
             // Dọn dẹp workspace
             cleanWs()
-        }
+        } 
 
         success {
             // Gửi thông báo Telegram khi build thành công
