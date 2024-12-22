@@ -65,7 +65,7 @@ pipeline {
             // Dọn dẹp workspace
             cleanWs()
         } 
-
+ 
         success {
             // Gửi thông báo Telegram khi build thành công
             sendTelegramMessage("✅ Build #${BUILD_NUMBER} was successful! ✅")
