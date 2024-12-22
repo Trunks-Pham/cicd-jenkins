@@ -24,7 +24,10 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Running tests...'
+                script {
+                    // Không sử dụng sudo, đảm bảo user Jenkins có quyền chạy Docker
+                    sh 'docker run ${DOCKER_IMAGE}:${DOCKER_TAG} go test'
+                }
             }
         }
 
