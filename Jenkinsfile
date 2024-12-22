@@ -57,7 +57,7 @@ pipeline {
                 // Chạy container mới
                 sh 'docker container run -d --rm --name server-golang -p 4000:3000 --network dev ${DOCKER_IMAGE}:${DOCKER_TAG}'
             }
-        }
+        } 
     }
  
     post { 

@@ -20,7 +20,7 @@ FROM golang:1.23.2-alpine3.20
 # Cài đặt bash và curl để kiểm tra dễ dàng hơn
 RUN apk update && apk add --no-cache bash curl
 
-WORKDIR /app
+WORKDIR /app 
  
 # Sao chép go.mod và go.sum
 COPY go.mod go.sum ./

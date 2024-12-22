@@ -15,7 +15,7 @@ var Products []Product
 func main() {
 	r := gin.Default()
 
-	r.GET("/products", func(c *gin.Context) {
+	r.GET("/products", func(c *gin.Context) { 
 		c.JSON(200, Products)
 	})
 
