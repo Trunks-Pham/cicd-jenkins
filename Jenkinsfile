@@ -60,7 +60,7 @@ pipeline {
         }
     }
 
-    post {
+    post { 
         always {
             // Dọn dẹp workspace
             cleanWs()

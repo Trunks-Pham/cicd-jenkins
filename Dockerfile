@@ -21,7 +21,7 @@ FROM golang:1.23.2-alpine3.20
 RUN apk update && apk add --no-cache bash curl
 
 WORKDIR /app
-
+ 
 # Sao chép go.mod và go.sum
 COPY go.mod go.sum ./
 
