@@ -15,8 +15,12 @@ var Products []Product
 func main() {
 	r := gin.Default()
 
-	r.GET("/products", func(c *gin.Context) { 
-		c.JSON(200, Products)
+	r.GET("/products", func(c *gin.Context) {
+		if len(Products) == 0 {
+			c.JSON(200, gin.H{"message": "Không có sản phẩm nha mom"})
+		} else {
+			c.JSON(200, Products)
+		}
 	})
 
 	r.POST("/products", func(c *gin.Context) {
